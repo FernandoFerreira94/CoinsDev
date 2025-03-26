@@ -1,54 +1,55 @@
-# React + TypeScript + Vite
+# CoinsDev
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**CoinsDev** é um projeto de interface dinâmica desenvolvido em **React.js**, que permite aos usuários explorar informações sobre diversas criptomoedas. O projeto utiliza **Axios** para fazer chamadas à API da CoinCap, apresentando propriedades como preço, valor de mercado, volume e mudança percentual em 24 horas. Os valores são exibidos em formatos amigáveis para o usuário.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Busca Dinâmica de Moedas**: Utilize o campo de pesquisa para encontrar detalhes sobre criptomoedas específicas.
+- **Listagem de Criptomoedas**: Exibe uma tabela com informações como:
+  - Nome da moeda
+  - Símbolo
+  - Valor de mercado (formatado)
+  - Preço (formatado)
+  - Volume 24h (formatado)
+  - Mudança percentual em 24 horas
+- **Detalhes da Moeda**: Clique em uma moeda para visualizar informações detalhadas em uma página específica.
+- **Paginação**: Carregue mais moedas dinamicamente ao clicar no botão "Carregar mais...".
 
-## Expanding the ESLint configuration
+## Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React.js**: Framework JavaScript para construção de interfaces de usuário.
+- **React Hooks**:
+  - `useState`: Gerenciamento de estado local (por exemplo, moedas e input do usuário).
+  - `useEffect`: Gerenciamento de efeitos colaterais (como chamadas de API).
+  - `useParams`: Obtenção de parâmetros da URL para carregamento de dados específicos (detalhes da moeda).
+- **Axios**: Biblioteca para requisições HTTP à API da CoinCap.
+- **CSS Modules**: Estilização modular para componentes React.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Estrutura do Projeto
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+O projeto está organizado da seguinte maneira:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Principais Componentes
+
+- **Home.tsx**:
+  - Lista criptomoedas.
+  - Permite buscar por uma moeda específica.
+  - Utiliza a API CoinCap para buscar dados de moedas.
+  - Formata valores de preços, mercado e volume em um formato amigável.
+
+- **Detail.tsx**:
+  - Exibe detalhes específicos de uma moeda selecionada.
+  - Usa o parâmetro da URL (`useParams`) para buscar dados da moeda correspondente.
+  - Inclui botão para voltar à página inicial.
+
+- **Api.ts**:
+  - Gerencia instâncias do Axios para chamadas à API CoinCap.
+  - Funções reutilizáveis para busca de dados gerais e detalhes de moedas.
+
+## Como Executar o Projeto
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/coinsdev.git
+   cd coinsdev
