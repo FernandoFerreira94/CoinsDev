@@ -30,12 +30,10 @@ export default function Detail() {
     setIsLoading(true)
     try {
       const api = AxiosDetail(cripto)
-      const response = await api.get<DataProps>('/')
+      const response = await api.getData() // <== usa getData sem parâmetro
 
       if ('data' in response.data) {
-        // Verifica se o campo 'data' existe
         const coinsData = response.data.data
-
         // Processamento dos dados...
 
         const price = Intl.NumberFormat('en-US', {
