@@ -5,16 +5,6 @@ import { AxiosDetail } from '../../services/Api'
 import { CoinProps } from '../home'
 import styles from './detail.module.css'
 
-interface ResponseData {
-  data: CoinProps
-}
-
-interface ErrorData {
-  error: string
-}
-
-type DataProps = ResponseData | ErrorData
-
 export default function Detail() {
   const { cripto } = useParams()
   const [detail, setDetail] = useState<CoinProps | undefined>(undefined)
