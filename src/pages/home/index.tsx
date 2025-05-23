@@ -44,8 +44,8 @@ export default function Home() {
   async function getData(offset: number) {
     setIsLoading(false)
     try {
-      const api = Axios(offset)
-      const response = await api.get<DataProps>('')
+      const { getData } = Axios(offset)
+      const response = await getData()
 
       const coinsData = response.data.data
 
@@ -104,38 +104,36 @@ export default function Home() {
           </button>
         </form>
 
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Moeda</th>
-              <th scope="col">Valor mercado</th>
-              <th scope="col">Preço</th>
-              <th scope="col">Volume</th>
-              <th scope="col">Mudança 24h</th>
-            </tr>
-          </thead>
+        {isLoading ? (
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Moeda</th>
+                <th scope="col">Valor mercado</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Volume</th>
+                <th scope="col">Mudança 24h</th>
+              </tr>
+            </thead>
 
-          {isLoading ? (
             <>
               <tbody>
                 {coins.length > 0 &&
                   coins.map((item, index) => (
                     <tr className={styles.tr} key={index}>
                       <td className={styles.tdLabel} data-label="Moeda">
-                        <div className={styles.name}>
-                          <img
-                            src={`https://assets.coincap.io/assets/icons/${item.symbol.toLowerCase()}2@2x.png`}
-                            alt="Logo Cript"
-                            className={styles.logo}
-                          />
-                          <Link
-                            to={`/detail/${item.id}`}
-                            className={styles.linkCoins}
-                            rel="noopener noreferrer"
-                          >
-                            <span> {item.name}</span> | {item.symbol}
-                          </Link>{' '}
-                        </div>
+                        <img
+                          src={`https://assets.coincap.io/assets/icons/${item.symbol.toLowerCase()}2@2x.png`}
+                          alt="Logo Cript"
+                          className={styles.logo}
+                        />
+                        <Link
+                          to={`/detail/${item.id}`}
+                          className={styles.linkCoins}
+                          rel="noopener noreferrer"
+                        >
+                          <span> {item.name}</span> | {item.symbol}
+                        </Link>{' '}
                       </td>
 
                       <td className={styles.tdLabel} data-label="Valor mercado">
@@ -164,12 +162,12 @@ export default function Home() {
                   ))}
               </tbody>
             </>
-          ) : (
-            <div className={styles.load}>
-              <h1>Carregando Coins...</h1>
-            </div>
-          )}
-        </table>
+          </table>
+        ) : (
+          <div className={styles.load}>
+            <h1>Carregando Coins...</h1>
+          </div>
+        )}
         {isLoading && (
           <button className={styles.btnMore} onClick={handleGetMore}>
             Carregar mais...

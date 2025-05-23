@@ -1,21 +1,20 @@
 import axios from 'axios'
 
-export const Axios = (offeset: number) => {
-  const url = `https://api.coincap.io/v2/assets?limit=${offeset}&offset=0`
+const API_KEY =
+  'de4902cf241ccdebb7ddc6175a990f7a2eb00fb479b493b7a6985127d087d991'
 
-  const api = axios.create({
-    baseURL: url,
-  })
+export const Axios = (limit: number) => {
+  const url = `https://rest.coincap.io/v3/assets?limit=${limit}&offset=0&apiKey=${API_KEY}`
 
-  return api
+  return {
+    getData: () => axios.get(url),
+  }
 }
 
 export const AxiosDetail = (cripto: string) => {
-  const url = `https://api.coincap.io/v2/assets/${cripto}`
+  const url = `https://rest.coincap.io/v3/assets/${cripto}?apiKey=${API_KEY}`
 
-  const api = axios.create({
-    baseURL: url,
-  })
-
-  return api
+  return {
+    getData: () => axios.get(url),
+  }
 }
